@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FITFLOOR Design System - Bold & Premium Bottomwear Experience */
+
+@layer base {
+  :root {
+    /* Core palette - White / Off-black / Denim Blue / Beige */
+    --background: 0 0% 100%;
+    --foreground: 220 10% 10%;
+    
+    /* Denim blue accent */
+    --denim: 215 55% 45%;
+    --denim-foreground: 0 0% 100%;
+    --denim-light: 215 40% 92%;
+    
+    /* Beige/Sand tones */
+    --sand: 35 30% 90%;
+    --sand-foreground: 35 20% 25%;
+    --sand-dark: 35 25% 75%;
+    
+    /* Off-black */
+    --charcoal: 220 10% 12%;
+    --charcoal-foreground: 0 0% 98%;
+    
+    /* Interactive elements */
+    --primary: 220 10% 10%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 220 10% 20%;
+    
+    /* Subtle elements */
+    --secondary: 35 30% 95%;
+    --secondary-foreground: 220 10% 15%;
+    
+    --muted: 220 10% 96%;
+    --muted-foreground: 220 10% 45%;
+    
+    --accent: 215 55% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    --border: 220 10% 90%;
+    --input: 220 10% 90%;
+    --ring: 215 55% 45%;
+    
+    /* Cards and surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 220 10% 10%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 10% 10%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --radius: 0.5rem;
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 215 55% 45%;
+  }
+
+  .dark {
+    --background: 220 10% 8%;
+    --foreground: 0 0% 98%;
+    
+    --denim: 215 55% 55%;
+    --denim-foreground: 0 0% 100%;
+    --denim-light: 215 30% 20%;
+    
+    --sand: 35 15% 18%;
+    --sand-foreground: 35 20% 85%;
+    --sand-dark: 35 15% 30%;
+    
+    --charcoal: 220 10% 95%;
+    --charcoal-foreground: 220 10% 10%;
+    
+    --primary: 0 0% 98%;
+    --primary-foreground: 220 10% 10%;
+    --primary-hover: 0 0% 90%;
+    
+    --secondary: 220 10% 15%;
+    --secondary-foreground: 0 0% 85%;
+    
+    --muted: 220 10% 15%;
+    --muted-foreground: 220 10% 60%;
+    
+    --accent: 215 55% 55%;
+    --accent-foreground: 0 0% 100%;
+    
+    --border: 220 10% 20%;
+    --input: 220 10% 20%;
+    --ring: 215 55% 55%;
+    
+    --card: 220 10% 10%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 220 10% 10%;
+    --popover-foreground: 0 0% 98%;
+    
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Display typography - Josefin Sans (thin, elegant) */
+  .font-display {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* Body typography - Inter */
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  /* Premium button styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-8 py-4 font-medium tracking-wide
+           transition-all duration-300 ease-out
+           hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-8 py-4 font-medium tracking-wide
+           transition-all duration-300 ease-out bg-transparent
+           hover:bg-primary hover:text-primary-foreground;
+  }
+
+  .btn-denim {
+    @apply bg-denim text-denim-foreground px-8 py-4 font-medium tracking-wide
+           transition-all duration-300 ease-out
+           hover:brightness-110 hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-500 ease-out
+           hover:shadow-2xl hover:-translate-y-1;
+  }
+
+  /* Image zoom on hover */
+  .img-zoom {
+    @apply overflow-hidden;
+  }
+  .img-zoom img {
+    @apply transition-transform duration-700 ease-out;
+  }
+  .img-zoom:hover img {
+    @apply scale-110;
+  }
+
+  /* Blur to sharp transition */
+  .blur-reveal {
+    @apply transition-all duration-500;
+    filter: blur(10px);
+  }
+  .blur-reveal:hover,
+  .blur-reveal.revealed {
+    filter: blur(0);
+  }
+
+  /* Underline animation for links */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-current
+           scale-x-0 origin-right transition-transform duration-300;
+  }
+  .link-underline:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+
+  /* Gradient overlays */
+  .gradient-dark {
+    background: linear-gradient(to top, hsl(var(--charcoal)) 0%, transparent 100%);
+  }
+
+  .gradient-light {
+    background: linear-gradient(to bottom, transparent 0%, hsl(var(--background)) 100%);
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply backdrop-blur-md bg-background/80 border border-border/50;
+  }
+
+  /* Fit selector button active state */
+  .fit-btn {
+    @apply px-6 py-3 border-2 border-border text-sm font-medium tracking-wide
+           transition-all duration-300 ease-out
+           hover:border-primary hover:bg-primary/5;
+  }
+  .fit-btn.active {
+    @apply border-primary bg-primary text-primary-foreground;
+  }
+
+  /* Material texture preview */
+  .texture-preview {
+    @apply relative overflow-hidden rounded-lg cursor-pointer;
+  }
+  .texture-preview::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 to-transparent
+           opacity-0 transition-opacity duration-300 z-10;
+  }
+  .texture-preview:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  /* Size chart highlight */
+  .size-recommended {
+    @apply bg-accent/10 border-2 border-accent;
+  }
+}
+
+@layer utilities {
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-denim to-primary;
+  }
+
+  /* Parallax effect helper */
+  .parallax {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+
+  /* Aspect ratios for product images */
+  .aspect-product {
+    aspect-ratio: 3/4;
+  }
+
+  .aspect-hero {
+    aspect-ratio: 16/9;
+  }
+
+  .aspect-lookbook {
+    aspect-ratio: 4/5;
+  }
+}
