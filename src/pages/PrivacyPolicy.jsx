@@ -1,126 +1,90 @@
 import { useEffect } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+
 const PrivacyPolicy = () => {
   useEffect(() => {
-    document.title = "Privacy Policy - Linea Jewelry";
+    document.title = "Privacy Policy - Royal Virtus";
+    window.scrollTo(0, 0);
   }, []);
-  return <div className="min-h-screen bg-background">
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       
-      <main className="pt-6">
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <header className="mb-12 text-center">
-            <h1 className="text-4xl font-light text-foreground mb-4">Privacy Policy</h1>
-            <p className="text-muted-foreground">Last updated: January 15, 2024</p>
+      <main className="flex-1">
+        <div className="max-w-4xl mx-auto px-6 py-20">
+          <header className="mb-16 text-center">
+            <h1 className="text-5xl font-display mb-6 tracking-tight">Privacy Policy</h1>
+            <p className="text-muted-foreground font-light italic">Last updated: April 26, 2026</p>
           </header>
 
-          <div className="prose prose-lg max-w-none space-y-8">
+          <div className="prose prose-neutral max-w-none space-y-12 text-foreground/80 font-light leading-relaxed">
             <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">Introduction</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                At Linea Jewelry Inc. ("we," "our," or "us"), we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, make a purchase, or interact with our services.
+              <h2 className="text-2xl font-medium text-foreground mb-6 uppercase tracking-wider">1. Commitment to Privacy</h2>
+              <p>
+                At <strong>Royal Virtus</strong>, we are committed to maintaining the trust and confidence of our visitors to our web site. In particular, we want you to know that Royal Virtus is not in the business of selling, renting or trading email lists with other companies and businesses for marketing purposes.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">Information We Collect</h2>
-              <div className="space-y-4">
+              <h2 className="text-2xl font-medium text-foreground mb-6 uppercase tracking-wider">2. Information We Collect</h2>
+              <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-light text-foreground mb-2">Personal Information</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We may collect personal information that you provide directly to us, including:
+                  <h3 className="text-lg font-medium text-foreground mb-3">Directly Provided Data</h3>
+                  <p>
+                    When you make a purchase or attempt to make a purchase through Royal Virtus, we collect certain information from you, including your name, billing address, shipping address, payment information (including credit card numbers), email address, and phone number.
                   </p>
-                  <ul className="list-disc list-inside text-muted-foreground mt-2 space-y-1">
-                    <li>Name, email address, and contact information</li>
-                    <li>Billing and shipping addresses</li>
-                    <li>Payment information (processed securely through third-party providers)</li>
-                    <li>Account preferences and communication settings</li>
-                  </ul>
                 </div>
-                
                 <div>
-                  <h3 className="text-xl font-light text-foreground mb-2">Usage Information</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We automatically collect certain information about your device and usage patterns, including IP address, browser type, pages visited, and interaction data to improve our services and user experience.
+                  <h3 className="text-lg font-medium text-foreground mb-3">Device & Browsing Data</h3>
+                  <p>
+                    When you visit the Site, we automatically collect certain information about your device, including information about your web browser, IP address, time zone, and some of the cookies that are installed on your device.
                   </p>
                 </div>
               </div>
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">How We Use Your Information</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                We use the information we collect for various purposes, including:
-              </p>
-              <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                <li>Processing and fulfilling your orders</li>
-                <li>Providing customer support and responding to inquiries</li>
-                <li>Sending promotional communications (with your consent)</li>
-                <li>Improving our website functionality and user experience</li>
-                <li>Preventing fraud and ensuring security</li>
-                <li>Complying with legal obligations</li>
+              <h2 className="text-2xl font-medium text-foreground mb-6 uppercase tracking-wider">3. How We Use Your Information</h2>
+              <p className="mb-4">We use the Order Information that we collect generally to fulfill any orders placed through the Site. Additionally, we use this Order Information to:</p>
+              <ul className="list-disc pl-6 space-y-3">
+                <li>Communicate with you regarding your orders and inquiries.</li>
+                <li>Screen our orders for potential risk or fraud.</li>
+                <li>Provide you with information or advertising relating to our products or services when in line with the preferences you have shared with us.</li>
+                <li>Optimize and improve our Site (for example, by generating analytics about how our customers browse and interact with the Site).</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">Information Sharing and Disclosure</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
-              </p>
-              <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                <li>With service providers who assist us in operating our business</li>
-                <li>When required by law or to protect our rights</li>
-                <li>In connection with a business transaction (merger, acquisition, etc.)</li>
-                <li>With your explicit consent</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">Data Security</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure.
+              <h2 className="text-2xl font-medium text-foreground mb-6 uppercase tracking-wider">4. Sharing Your Personal Information</h2>
+              <p>
+                We share your Personal Information with third parties to help us use your Personal Information, as described above. For example, we use Google Analytics to help us understand how our customers use the Site. We also use secure payment gateways to process your financial transactions safely.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">Your Rights and Choices</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Depending on your location, you may have certain rights regarding your personal information:
-              </p>
-              <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                <li>Access to your personal information</li>
-                <li>Correction of inaccurate or incomplete information</li>
-                <li>Deletion of your personal information</li>
-                <li>Objection to or restriction of processing</li>
-                <li>Data portability</li>
-                <li>Withdrawal of consent (where applicable)</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">Cookies and Tracking</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                We use cookies and similar tracking technologies to enhance your browsing experience, analyze website traffic, and personalize content. You can control cookie settings through your browser preferences, though this may affect website functionality.
+              <h2 className="text-2xl font-medium text-foreground mb-6 uppercase tracking-wider">5. Data Retention</h2>
+              <p>
+                When you place an order through the Site, we will maintain your Order Information for our records unless and until you ask us to delete this information.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">Changes to This Policy</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on our website and updating the "Last updated" date above.
+              <h2 className="text-2xl font-medium text-foreground mb-6 uppercase tracking-wider">6. Your Rights</h2>
+              <p>
+                If you are a resident of certain territories (such as the EU), you have the right to access personal information we hold about you and to ask that your personal information be corrected, updated, or deleted. If you would like to exercise this right, please contact us through the contact information below.
               </p>
             </section>
 
-            <section>
-              <h2 className="text-2xl font-light text-foreground mb-4">Contact Us</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                If you have any questions about this Privacy Policy or our privacy practices, please contact us at:
+            <section className="bg-secondary/30 p-10 rounded-2xl border border-border">
+              <h2 className="text-2xl font-medium text-foreground mb-6 uppercase tracking-wider">Contact Us</h2>
+              <p className="mb-6 text-sm">
+                For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at:
               </p>
-              <div className="mt-4 text-muted-foreground">
-                <p>Email: privacy@lineajewelry.com</p>
-                <p>Phone: +1 (212) 555-0123</p>
-                <p>Address: 123 Madison Avenue, New York, NY 10016</p>
+              <div className="space-y-2 text-foreground font-medium">
+                <p>Email: hello@royalvirtus.com</p>
+                <p>Corporate Office: 123 Madison Avenue, New York, NY 10016</p>
               </div>
             </section>
           </div>
@@ -128,9 +92,8 @@ const PrivacyPolicy = () => {
       </main>
       
       <Footer />
-    </div>;
+    </div>
+  );
 };
-var stdin_default = PrivacyPolicy;
-export {
-  stdin_default as default
-};
+
+export default PrivacyPolicy;

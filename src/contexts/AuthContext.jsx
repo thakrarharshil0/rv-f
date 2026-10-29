@@ -1,13 +1,17 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import api from "@/lib/api";
-const AuthContext = createContext(void 0);
+
+const AuthContext = createContext(undefined);
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 
+  const TOKEN_KEY = "royal-virtus-token";
+
   useEffect(() => {
     const bootstrapAuth = async () => {
-      const token = localStorage.getItem("fitfloor-token");
+      const token = localStorage.getItem(TOKEN_KEY);
       const storedUser = localStorage.getItem("user");
 
       if (storedUser) {
@@ -19,6 +23,8 @@ const AuthProvider = ({ children }) => {
       }
 
       if (!token) {
+        setUser(null);
+        localStorage.removeItem("user");
         setIsAuthLoading(false);
         return;
       }
@@ -27,8 +33,9 @@ const AuthProvider = ({ children }) => {
         const data = await api.auth.me();
         setUser(data.user);
         localStorage.setItem("user", JSON.stringify(data.user));
-      } catch {
-        localStorage.removeItem("fitfloor-token");
+      } catch (error) {
+        console.error("Auth bootstrap failed:", error);
+        localStorage.removeItem(TOKEN_KEY);
         localStorage.removeItem("user");
         setUser(null);
       } finally {
@@ -47,7 +54,15 @@ const AuthProvider = ({ children }) => {
 
     const data = await endpoint(payload);
 
-    localStorage.setItem("fitfloor-token", data.token);
+    localStorage.setItem(TOKEN_KEY, data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+    setUser(data.user);
+    return data.user;
+  };
+
+  const socialLogin = async (payload) => {
+    const data = await api.auth.socialLogin(payload);
+    localStorage.setItem(TOKEN_KEY, data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
     return data.user;
@@ -55,22 +70,23 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("fitfloor-token");
+    localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem("user");
   };
 
-  return <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user, isAuthLoading }}>
-            {children}
-        </AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, login, logout, socialLogin, isAuthenticated: !!user, isAuthLoading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
+
 const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === void 0) {
+  if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
-export {
-  AuthProvider,
-  useAuth
-};
+
+export { AuthProvider, useAuth };

@@ -69,20 +69,28 @@ const ShoppingBag = ({ isOpen, onClose, cartItems, updateQuantity, onViewFavorit
   }
               <div className="flex-1 overflow-y-auto space-y-6 mb-6">
                 {cartItems.map((item) => <div key={item.id} className="flex gap-4">
-                    <div className="w-20 h-20 bg-muted/10 rounded-lg overflow-hidden">
+                    <div className="w-20 h-20 bg-muted/10 rounded-lg overflow-hidden flex-shrink-0">
                       <img
-    src={item.image}
-    alt={item.name}
-    className="w-full h-full object-cover"
-  />
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-start mb-2">
                         <div>
                           <p className="text-sm font-light text-muted-foreground">{item.category}</p>
                           <h3 className="text-sm font-medium text-foreground">{item.name}</h3>
+                          {item.size && (
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                              Size: <span className="font-semibold text-black">{item.size}</span>
+                              {item.length && !item.size.includes(`L${item.length}`) && (
+                                <span> • Length: <span className="font-semibold text-black">{item.length}</span></span>
+                              )}
+                            </p>
+                          )}
                         </div>
-                        <p className="text-sm font-light text-foreground">{item.price}</p>
+                        <p className="text-sm font-light text-foreground">₹{parseFloat(item.price).toLocaleString("en-IN")}</p>
                       </div>
                       <div className="flex items-center gap-2 mt-3">
                         <div className="flex items-center border border-border">

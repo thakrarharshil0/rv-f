@@ -8,21 +8,21 @@ import AboutSidebar from "../../components/about/AboutSidebar";
 const StoreLocator = () => {
   const stores = [
     {
-      name: "FITFLOOR Mumbai",
+      name: "Royal Virtus Mumbai",
       address: "Phoenix Palladium, Senapati Bapat Marg, Lower Parel, Mumbai, Maharashtra 400013",
       phone: "+91 22 5555 0123",
       hours: "Mon-Sat: 11AM-9PM, Sun: 11AM-9PM",
       services: ["Personal Styling", "Alterations", "Custom Design", "Valet Parking"]
     },
     {
-      name: "FITFLOOR Delhi",
+      name: "Royal Virtus Delhi",
       address: "DLF Emporio, Vasant Kunj, New Delhi, Delhi 110070",
       phone: "+91 11 5555 0456",
       hours: "Mon-Sat: 11AM-9PM, Sun: 11AM-9PM",
       services: ["Personal Styling", "Made to Measure", "VIP Suites", "Home Delivery"]
     },
     {
-      name: "FITFLOOR Bangalore",
+      name: "Royal Virtus Bangalore",
       address: "UB City, Vittal Mallya Road, Bengaluru, Karnataka 560001",
       phone: "+91 80 5555 0789",
       hours: "Mon-Sat: 10:30AM-9PM, Sun: 11AM-8PM",
@@ -140,3 +140,4 @@ var stdin_default = StoreLocator;
 export {
   stdin_default as default
 };
+

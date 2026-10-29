@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
+import api from "@/lib/api";
+import { toast } from "sonner";
 const CustomStar = ({ filled, onClick, className }) => <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 20 20"
@@ -15,15 +17,32 @@ const CustomStar = ({ filled, onClick, className }) => <svg
   clipRule="evenodd"
 />
   </svg>;
-const ReviewProduct = () => {
+const ReviewProduct = ({ productId }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const [title, setTitle] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const submitReview = () => {
-    console.log("Review submitted:", { rating, review });
-    setIsOpen(false);
-    setRating(0);
-    setReview("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const submitReview = async () => {
+    setIsSubmitting(true);
+    try {
+      await api.products.addReview(productId, {
+        rating,
+        title: title || "Product Review",
+        comment: review
+      });
+      toast.success("Review submitted successfully! It will be visible after approval.");
+      setIsOpen(false);
+      setRating(0);
+      setReview("");
+      setTitle("");
+    } catch (error) {
+      console.error("Review error:", error);
+      toast.error(error.message || "Failed to submit review. Please login first.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -62,10 +81,10 @@ const ReviewProduct = () => {
           
           <Button
     onClick={submitReview}
-    disabled={rating === 0 || review.trim() === ""}
+    disabled={rating === 0 || review.trim() === "" || isSubmitting}
     className="w-full h-12 bg-foreground text-background hover:bg-foreground/90 font-light rounded-none"
   >
-            Submit review
+            {isSubmitting ? "Submitting..." : "Submit review"}
           </Button>
         </div>
       </DialogContent>

@@ -1,117 +1,128 @@
 import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Heart } from "lucide-react";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import ImageZoom from "./ImageZoom";
-import jeansBlackSkinny from "@/assets/jeans-black-skinny.jpg";
-import jeansBlueDark from "@/assets/jeans-blue-dark.jpg";
-import jeansBlueRipped from "@/assets/jeans-blue-ripped.jpg";
-import pantsBlackTrack from "@/assets/pants-black-track.jpg";
-import pantsGreyJoggers from "@/assets/pants-grey-joggers.jpg";
-const productImages = [
-  jeansBlackSkinny,
-  jeansBlueDark,
-  jeansBlueRipped,
-  pantsBlackTrack,
-  pantsGreyJoggers
-];
-const ProductImageGallery = () => {
+
+const ProductImageGallery = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [zoomInitialIndex, setZoomInitialIndex] = useState(0);
-  const touchStartX = useRef(null);
-  const touchEndX = useRef(null);
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % productImages.length);
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
+
+  // Combine main image with gallery images
+  const productImages = [
+    product.image,
+    ...(product.gallery || [])
+  ].filter(Boolean);
+
+  const isLiked = isFavorite(parseInt(product.id));
+
+  const toggleFavorite = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isLiked) {
+      removeFromFavorites(parseInt(product.id));
+    } else {
+      addToFavorites({
+        ...product,
+        id: parseInt(product.id),
+        price: `₹${parseFloat(product.price).toLocaleString("en-IN")}`
+      });
+    }
   };
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
-  };
+
   const handleImageClick = (index) => {
     setZoomInitialIndex(index);
     setIsZoomOpen(true);
   };
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const difference = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 50;
-    if (Math.abs(difference) > minSwipeDistance) {
-      if (difference > 0) {
-        nextImage();
-      } else {
-        prevImage();
-      }
-    }
-    touchStartX.current = null;
-    touchEndX.current = null;
-  };
-  return <div className="w-full">
-      {
-    /* Desktop: Vertical scrolling gallery (1024px and above) */
-  }
-      <div className="hidden lg:block">
-        <div className="space-y-4">
-          {productImages.map((image, index) => <div
-    key={index}
-    className="w-full aspect-square overflow-hidden cursor-pointer group"
-    onClick={() => handleImageClick(index)}
-  >
-              <img
-    src={image}
-    alt={`Product view ${index + 1}`}
-    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-  />
-            </div>)}
-        </div>
-      </div>
 
-      {
-    /* Tablet/Mobile: Image slider (below 1024px) */
-  }
-      <div className="lg:hidden">
-        <div className="relative">
-          <div
-    className="w-full aspect-square overflow-hidden cursor-pointer group touch-pan-y"
-    onClick={() => handleImageClick(currentImageIndex)}
-    onTouchStart={handleTouchStart}
-    onTouchMove={handleTouchMove}
-    onTouchEnd={handleTouchEnd}
-  >
+  return (
+    <div className="w-full flex flex-col lg:flex-row gap-4">
+      {/* Desktop: Thumbnails on the left */}
+      <div className="hidden lg:flex flex-col gap-3 w-20 flex-shrink-0">
+        {productImages.map((image, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentImageIndex(index)}
+            className={`aspect-[3/4] border-2 overflow-hidden transition-all ${
+              index === currentImageIndex ? "border-black" : "border-transparent opacity-70 hover:opacity-100"
+            }`}
+          >
             <img
-    src={productImages[currentImageIndex]}
-    alt={`Product view ${currentImageIndex + 1}`}
-    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 select-none"
-  />
-          </div>
+              src={image}
+              alt={`${product.name} thumb ${index + 1}`}
+              className="w-full h-full object-cover"
+            />
+          </button>
+        ))}
+      </div>
 
-          {
-    /* Dots indicator */
-  }
-          <div className="flex justify-center mt-4 gap-2">
-            {productImages.map((_, index) => <button
-    key={index}
-    onClick={() => setCurrentImageIndex(index)}
-    className={`w-2 h-2 rounded-full transition-colors ${index === currentImageIndex ? "bg-foreground" : "bg-muted"}`}
-  />)}
-          </div>
+      {/* Main Image Container */}
+      <div className="flex-1 relative group">
+        <div 
+          className="aspect-[3/4] bg-[#F2F2F2] overflow-hidden cursor-zoom-in relative"
+          onClick={() => handleImageClick(currentImageIndex)}
+        >
+          <motion.img
+            key={currentImageIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            src={productImages[currentImageIndex]}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
+
+          {/* New Tag */}
+          {product.is_new && (
+            <div className="absolute top-0 left-0 bg-white px-3 py-1.5 shadow-sm">
+              <span className="text-xs font-bold tracking-tight text-black">New</span>
+            </div>
+          )}
+
+          {/* Wishlist Icon */}
+          <button
+            onClick={toggleFavorite}
+            className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm transition-transform hover:scale-110 z-10"
+          >
+            <Heart 
+              size={24} 
+              className={`${isLiked ? "fill-[#C41230] text-[#C41230]" : "text-black"}`} 
+              strokeWidth={1.5}
+            />
+          </button>
+        </div>
+
+        {/* Mobile Thumbnails (Horizontal Scroll) */}
+        <div className="flex lg:hidden gap-2 mt-4 overflow-x-auto pb-2 scrollbar-hide">
+          {productImages.map((image, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`flex-shrink-0 w-16 aspect-[3/4] border-2 overflow-hidden ${
+                index === currentImageIndex ? "border-black" : "border-transparent opacity-60"
+              }`}
+            >
+              <img
+                src={image}
+                alt={`${product.name} mobile thumb ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </button>
+          ))}
         </div>
       </div>
 
-      {
-    /* Image Zoom Modal */
-  }
+      {/* Image Zoom Modal */}
       <ImageZoom
-    images={productImages}
-    initialIndex={zoomInitialIndex}
-    isOpen={isZoomOpen}
-    onClose={() => setIsZoomOpen(false)}
-  />
-    </div>;
+        images={productImages}
+        initialIndex={zoomInitialIndex}
+        isOpen={isZoomOpen}
+        onClose={() => setIsZoomOpen(false)}
+      />
+    </div>
+  );
 };
-var stdin_default = ProductImageGallery;
-export {
-  stdin_default as default
-};
+
+export default ProductImageGallery;

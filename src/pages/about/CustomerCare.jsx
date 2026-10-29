@@ -31,7 +31,7 @@ const CustomerCare = () => {
               </div>
               <div className="space-y-4">
                 <h3 className="text-lg font-light text-foreground">Email</h3>
-                <p className="text-muted-foreground">care@fitfloor.com</p>
+                <p className="text-muted-foreground">care@Royal Virtus.com</p>
                 <p className="text-sm text-muted-foreground">Response within 24 hours</p>
               </div>
               <div className="space-y-4">
@@ -69,7 +69,7 @@ const CustomerCare = () => {
                   What quality guarantee do you offer?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
-                  All FITFLOOR clothing comes with a 1-year quality guarantee against manufacturing defects. This includes issues with seams, buttons, or zippers under normal wear conditions.
+                  All Royal Virtus clothing comes with a 1-year quality guarantee against manufacturing defects. This includes issues with seams, buttons, or zippers under normal wear conditions.
                 </AccordionContent>
               </AccordionItem>
 
@@ -84,7 +84,7 @@ const CustomerCare = () => {
 
               <AccordionItem value="care" className="border border-border rounded-lg px-6">
                 <AccordionTrigger className="text-left hover:no-underline">
-                  How should I care for my FITFLOOR clothing?
+                  How should I care for my Royal Virtus clothing?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
                   Every garment has a specific care label. Generally, we recommend washing in cold water and hanging to dry to preserve the fabric quality and fit.
@@ -93,10 +93,10 @@ const CustomerCare = () => {
 
               <AccordionItem value="authentication" className="border border-border rounded-lg px-6">
                 <AccordionTrigger className="text-left hover:no-underline">
-                  How do I know I'm getting authentic FITFLOOR quality?
+                  How do I know I'm getting authentic Royal Virtus quality?
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
-                  Every FITFLOOR piece undergoes a rigorous quality inspection before shipping. Look for our branded labels and tags to ensure authenticity.
+                  Every Royal Virtus piece undergoes a rigorous quality inspection before shipping. Look for our branded labels and tags to ensure authenticity.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -150,3 +150,4 @@ var stdin_default = CustomerCare;
 export {
   stdin_default as default
 };
+

@@ -57,7 +57,7 @@ const ScrollStorySection = () => {
     className="text-center mb-16 lg:mb-24"
   >
           <span className="inline-block px-4 py-1 bg-denim/10 text-denim text-sm font-medium tracking-widest rounded-full mb-4">
-            WHY FITFLOOR
+            WHY Royal Virtus
           </span>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl mb-4">
             ENGINEERED FOR LIFE
@@ -120,3 +120,4 @@ var stdin_default = ScrollStorySection;
 export {
   stdin_default as default
 };
+

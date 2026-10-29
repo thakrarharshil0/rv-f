@@ -1,6 +1,6 @@
 const stores = [
   {
-    name: "FITFLOOR Mumbai",
+    name: "Royal Virtus Mumbai",
     address: "Phoenix Palladium, Lower Parel, Mumbai 400013",
     phone: "+91 22 5555 0123",
     hours: "Mon-Sat: 11AM-9PM",
@@ -8,7 +8,7 @@ const stores = [
     lng: 72.825
   },
   {
-    name: "FITFLOOR Delhi",
+    name: "Royal Virtus Delhi",
     // Fixed: Removed trailing comma
     address: "DLF Emporio, Vasant Kunj, New Delhi 110070",
     phone: "+91 11 5555 0456",
@@ -17,7 +17,7 @@ const stores = [
     lng: 77.157
   },
   {
-    name: "FITFLOOR Bangalore",
+    name: "Royal Virtus Bangalore",
     address: "UB City, Vittal Mallya Road, Bengaluru 560001",
     // Fixed: Removed trailing comma
     phone: "+91 80 5555 0789",
@@ -63,3 +63,4 @@ var stdin_default = StoreMap;
 export {
   stdin_default as default
 };
+

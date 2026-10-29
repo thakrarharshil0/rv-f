@@ -1,0 +1,16 @@
+.canceled-orders-page {
+  --order-module-accent: #64748b;
+}
+
+.canceled-orders-page .order-submodule-page {
+  position: relative;
+}
+
+.canceled-orders-page .order-submodule-page::before {
+  content: '';
+  position: absolute;
+  inset: -10px -10px auto -10px;
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--order-module-accent), transparent);
+}

@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import api from "@/lib/api";
 const FavoritesContext = createContext(void 0);
 
-const hasAuthToken = () => Boolean(localStorage.getItem("fitfloor-token"));
+const hasAuthToken = () => Boolean(localStorage.getItem("royal-virtus-token"));
 
 const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
@@ -87,3 +87,4 @@ export {
   FavoritesProvider,
   useFavorites
 };
+

@@ -1,9 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "@/components/ui/use-toast";
 import api from "@/lib/api";
+import { useAuth } from "./AuthContext";
+
 const CartContext = createContext(void 0);
 
-const hasAuthToken = () => Boolean(localStorage.getItem("fitfloor-token"));
+const hasAuthToken = () => Boolean(localStorage.getItem("Royal Virtus-token"));
 
 const parsePrice = (price) => {
   if (typeof price === "number") return price;
@@ -13,7 +15,7 @@ const parsePrice = (price) => {
 const mapServerCartItems = (items) =>
   items.map((item) => ({
     id: item.id,
-    productId: item.productId,
+    productId: item.product_id, // Match backend field name
     name: item.name,
     image: item.image,
     size: item.size,
@@ -29,38 +31,63 @@ const useCart = () => {
   }
   return context;
 };
+
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    const loadCart = async () => {
-      const savedCart = localStorage.getItem("fitfloor-cart");
-
+    const loadAndSyncCart = async () => {
+      // 1. Load from local storage initially
+      const savedCart = localStorage.getItem("Royal Virtus-cart");
+      let localItems = [];
       if (savedCart) {
         try {
-          setCartItems(JSON.parse(savedCart));
+          localItems = JSON.parse(savedCart);
+          setCartItems(localItems);
         } catch (e) {
           console.error("Failed to parse cart", e);
         }
       }
 
-      if (!hasAuthToken()) {
-        return;
-      }
+      if (!user) return;
 
       try {
-        const data = await api.cart.get();
-        setCartItems(mapServerCartItems(data.items || []));
+        // 2. Fetch server cart
+        const serverData = await api.cart.get();
+        const serverItems = mapServerCartItems(serverData.items || []);
+
+        // 3. If local cart has items and server cart is empty (or we want to merge), sync them
+        // For simplicity, if server cart is empty but local has items, we push local to server
+        if (serverItems.length === 0 && localItems.length > 0) {
+          for (const item of localItems) {
+            await api.cart.addItem({
+              productId: item.productId || item.id,
+              name: item.name,
+              image: item.image,
+              price: item.price,
+              size: item.size,
+              color: item.color,
+              quantity: item.quantity,
+            });
+          }
+          // Fetch again after sync
+          const updatedData = await api.cart.get();
+          setCartItems(mapServerCartItems(updatedData.items || []));
+        } else {
+          // Use server cart as source of truth when logged in
+          setCartItems(serverItems);
+        }
       } catch (error) {
-        console.error("Failed to load server cart:", error.message);
+        console.error("Failed to sync cart:", error.message);
       }
     };
 
-    loadCart();
-  }, []);
+    loadAndSyncCart();
+  }, [user]);
 
   useEffect(() => {
-    localStorage.setItem("fitfloor-cart", JSON.stringify(cartItems));
+    localStorage.setItem("Royal Virtus-cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToCart = async (item) => {
@@ -166,3 +193,4 @@ export {
   CartProvider,
   useCart
 };
+

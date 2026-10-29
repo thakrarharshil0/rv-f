@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
-import FitFloorHeader from "../components/layout/FitFloorHeader";
-import FitFloorFooter from "../components/layout/FitFloorFooter";
+import Royal VirtusHeader from "../components/layout/Royal VirtusHeader";
+import Royal VirtusFooter from "../components/layout/Royal VirtusFooter";
 import FitSelector, { fitData } from "../components/product/FitSelector";
 import MaterialPreview from "../components/product/MaterialPreview";
 import ProductRotateView from "../components/product/ProductRotateView";
@@ -36,7 +36,7 @@ const productData = {
     ]
   }
 };
-const FitFloorProductDetail = () => {
+const Royal VirtusProductDetail = () => {
   const { productId } = useParams();
   const [selectedFit, setSelectedFit] = useState("slim");
   const [selectedSize, setSelectedSize] = useState(null);
@@ -53,7 +53,7 @@ const FitFloorProductDetail = () => {
     fitData[selectedFit].image
   ];
   return <div className="min-h-screen bg-background">
-      <FitFloorHeader />
+      <Royal VirtusHeader />
 
       <main className="pt-32 pb-20">
         <div className="container mx-auto px-4 lg:px-8">
@@ -318,10 +318,11 @@ const FitFloorProductDetail = () => {
         </div>
       </main>
 
-      <FitFloorFooter />
+      <Royal VirtusFooter />
     </div>;
 };
-var stdin_default = FitFloorProductDetail;
+var stdin_default = Royal VirtusProductDetail;
 export {
   stdin_default as default
 };
+

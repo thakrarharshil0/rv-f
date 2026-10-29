@@ -24,7 +24,7 @@ const OurStory = () => {
     image="/founders.png"
     imageAlt="Company founders"
     title="Founded on Passion"
-    content="FITFLOOR was born from a shared vision of creating contemporary clothing that transcends fleeting trends. Our founders, united by their passion for exceptional tailoring and sustainable fabrics, established the brand with a commitment to creating garments that tell a story - your story."
+    content="Royal Virtus was born from a shared vision of creating contemporary clothing that transcends fleeting trends. Our founders, united by their passion for exceptional tailoring and sustainable fabrics, established the brand with a commitment to creating garments that tell a story - your story."
     imagePosition="left"
   />
           </ContentSection>
@@ -78,3 +78,4 @@ var stdin_default = OurStory;
 export {
   stdin_default as default
 };
+

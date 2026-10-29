@@ -69,7 +69,7 @@ const Sustainability = () => {
                 <div className="space-y-4">
                   <h3 className="text-lg font-light text-foreground">Take-Back Program</h3>
                   <p className="text-muted-foreground">
-                    When you're ready for something new, we'll take back your FITFLOOR clothing to be recycled into future pieces.
+                    When you're ready for something new, we'll take back your Royal Virtus clothing to be recycled into future pieces.
                   </p>
                 </div>
               </div>
@@ -108,3 +108,4 @@ var stdin_default = Sustainability;
 export {
   stdin_default as default
 };
+

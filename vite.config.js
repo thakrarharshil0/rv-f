@@ -5,10 +5,14 @@ import { componentTagger } from "lovable-tagger";
 var vite_config_default = defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8080,
+    port: 3000,
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:4000",
+        target: "http://localhost:8000",
+        changeOrigin: true
+      },
+      "/storage": {
+        target: "http://localhost:8000",
         changeOrigin: true
       }
     }
@@ -17,6 +21,21 @@ var vite_config_default = defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src")
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('lucide-react')) return 'vendor-lucide';
+            if (id.includes('recharts')) return 'vendor-recharts';
+            if (id.includes('@radix-ui')) return 'vendor-radix';
+            if (id.includes('framer-motion')) return 'vendor-framer';
+            return 'vendor';
+          }
+        }
+      }
     }
   }
 }));
